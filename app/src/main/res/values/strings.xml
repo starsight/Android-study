@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android-study</string>
+    <item name="Tag_Pic" type="id"></item>
+    <item name="Tag_Text" type="id"></item>
 </resources>
