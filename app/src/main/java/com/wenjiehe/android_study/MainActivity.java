@@ -9,22 +9,30 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
 
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.ObjectValueFilter;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ArrayList<Object> mData = null;
     ListView listview;
+
+    private Spinner spin_one;
+    //private Spinner spin_two;
+    private Context mContext;
+    //判断是否为刚进去时触发onItemSelected的标志
+    //private boolean one_selected = false;
+    private boolean one_selected = false;
+    private SpinnerAdapter spinnerAdadpter;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,15 +42,37 @@ public class MainActivity extends AppCompatActivity{
     }
 
     private void initView() {
-        listview = (ListView)findViewById(R.id.listview);
+        listview = (ListView) findViewById(R.id.listview);
         mData.add(new SignText("1"));
         mData.add(new SignPic("2"));
         mData.add(new SignPic("2"));
         mData.add(new SignText("1"));
-        adapter ad = new adapter(mData,R.layout.text_list);
-listview.setAdapter(ad);
+        adapter ad = new adapter(mData, R.layout.text_list);
+        listview.setAdapter(ad);
+
+        mContext = MainActivity.this;
+        spinnerAdadpter = new SpinnerAdapter(mData, R.layout.item_spin_hero);
+        spin_one = (Spinner) findViewById(R.id.spin_one);
+        spin_one.setAdapter(spinnerAdadpter);
+        spin_one.setOnItemSelectedListener(this);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.spin_one:
+                if (one_selected) {
+                    Toast.makeText(mContext, "您的分段是~：" + parent.getItemAtPosition(position).toString(),
+                            Toast.LENGTH_SHORT).show();
+                } else one_selected = true;
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 
 
 }
