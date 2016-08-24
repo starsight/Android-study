@@ -100,13 +100,14 @@ class adapter extends MyAdapter{
     }
 
 
-    public void bindView(ViewHolder1 holder, Object obj,int type) {
+    @Override
+    public void bindView(Object holder, Object obj,int type) {
         if(type==TYPE_TEXT) {
             //(ViewHolder2)holder.setText(R.id.txt_content,"TYPE_TEXT");
     }
         else{
-            (holder).img_icon = (ImageView) holder.item.findViewById(R.id.im);
-            (holder).txt_aname = (TextView) holder.item.findViewById(R.id.pic_content);
+            ((ViewHolder1)holder).img_icon = (ImageView) ((ViewHolder1)holder).item.findViewById(R.id.im);
+            ((ViewHolder1)holder).txt_aname = (TextView) ((ViewHolder1)holder).item.findViewById(R.id.pic_content);
             //holder.item.setTag(R.id.Tag_Pic,holder);
             //((ViewHolder1)holder).setText(R.id.pic_content,"TYPE_PIC");
             //holder.setImageResource(R.id.im,R.drawable.imageview_scale);

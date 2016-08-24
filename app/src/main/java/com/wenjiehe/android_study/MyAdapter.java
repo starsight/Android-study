@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Objects;
 
-public  class MyAdapter<T> extends BaseAdapter {
+public abstract class MyAdapter<T> extends BaseAdapter {
 
     public ArrayList<T> mData;
     public int mLayoutRes;           //布局id
@@ -58,7 +58,7 @@ public  class MyAdapter<T> extends BaseAdapter {
         return holder.getItemView();
     }
 
-    //public abstract void bindView(Object holder, T obj, View convertView,int type);
+    public abstract void bindView(Object holder, T obj,int type);
 
     //添加一个元素
     public void add(T data) {
