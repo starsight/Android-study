@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,8 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         switch (parent.getId()) {
             case R.id.spin_one:
                 if (one_selected) {
-                    Toast.makeText(mContext, "您的分段是~：" + parent.getItemAtPosition(position).toString(),
-                            Toast.LENGTH_SHORT).show();
+                    myToast(MainActivity.this,"您的分段是~：" + parent.getItemAtPosition(position).toString());
                 } else one_selected = true;
                 break;
         }
@@ -74,5 +74,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
+    public void myToast(Context mContext,String str){
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.view_toast_custom,
+                (ViewGroup) findViewById(R.id.lly_toast));
+        //ImageView img_logo = (ImageView) view.findViewById(R.id.img_logo);
+        TextView tv_msg = (TextView) view.findViewById(R.id.tv_msg);
+        tv_msg.setText(str);
+        Toast toast = new Toast(mContext);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(view);
+        toast.show();
+    }
 
 }
