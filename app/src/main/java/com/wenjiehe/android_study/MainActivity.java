@@ -1,12 +1,15 @@
 package com.wenjiehe.android_study;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private boolean one_selected = false;
     private SpinnerAdapter spinnerAdadpter;
 
+    private TextView tx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void initView() {
+        tx = (TextView)findViewById(R.id.tx);
         listview = (ListView) findViewById(R.id.listview);
         mData.add(new SignText("1"));
         mData.add(new SignPic("2"));
@@ -56,6 +61,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spin_one = (Spinner) findViewById(R.id.spin_one);
         spin_one.setAdapter(spinnerAdadpter);
         spin_one.setOnItemSelectedListener(this);
+
+        tx.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Toast.makeText(MainActivity.this, "keylisytener~", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -71,7 +84,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+         /*AlertDialog alert = null;
+         AlertDialog.Builder builder = null;
+        alert = null;
+        builder = new AlertDialog.Builder(mContext);
+        alert = builder.setIcon(R.mipmap.ic_launcher)
+                .setTitle("系统提示：")
+                .setMessage("这是一个最普通的AlertDialog,\n带有三个按钮，分别是取消，中立和确定")
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(mContext, "你点击了取消按钮~", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(mContext, "你点击了确定按钮~", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNeutralButton("中立", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(mContext, "你点击了中立按钮~", Toast.LENGTH_SHORT).show();
+                    }
+                }).create();             //创建AlertDialog对象
+        alert.show();                    //显示对话框*/
     }
 
     public void myToast(Context mContext,String str){
