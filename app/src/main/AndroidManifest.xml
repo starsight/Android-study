@@ -14,11 +14,18 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity"></activity>
+        <activity android:name=".Main2Activity">
+        </activity>
+
+        <service android:name=".service.MyService">
+            <intent-filter>
+                <action android:name="com.wenjiehe.android_study.service.MY_SERVICE"/>
+            </intent-filter>
+        </service>
+
     </application>
 
 </manifest>

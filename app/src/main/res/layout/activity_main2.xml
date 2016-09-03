@@ -9,4 +9,18 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.wenjiehe.android_study.Main2Activity">
 
+
+    <Button
+        android:id="@+id/m2_bt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="bt1" />
+
+    <Button
+        android:id="@+id/m2_bt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/m2_bt1"
+        android:text="bt2" />
+
 </RelativeLayout>

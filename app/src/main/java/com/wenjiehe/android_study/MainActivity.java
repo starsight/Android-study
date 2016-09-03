@@ -22,6 +22,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.ObjectValueFilter;
+import com.wenjiehe.android_study.service.MyService;
 
 import java.util.ArrayList;
 
@@ -80,15 +81,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        final Intent intent = new Intent(MainActivity.this,MyService.class);
+        intent.setAction("com.wenjiehe.android_study.service.MY_SERVICE");
+        intent.setPackage("com.wenjiehe");
+        Log.i("Mainb",getPackageName());
         tx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in  = new Intent(MainActivity.this,Main2Activity.class);
+
+                startService(intent);
+                /*Intent in  = new Intent(MainActivity.this,Main2Activity.class);
                 //in.putExtra("a",one_selected);
                 Bundle bd = new Bundle();
                 bd.putBoolean("firstActivity",one_selected);
                 in.putExtras(bd);
-                startActivityForResult(in,3);
+                startActivityForResult(in,3);*/
             }
         });
     }
