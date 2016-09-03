@@ -4,13 +4,16 @@ package com.wenjiehe.android_study;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -62,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spin_one.setAdapter(spinnerAdadpter);
         spin_one.setOnItemSelectedListener(this);
 
+        tx.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+            }
+        });
+
         tx.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -69,6 +79,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 return false;
             }
         });
+
+        tx.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in  = new Intent(MainActivity.this,Main2Activity.class);
+                //in.putExtra("a",one_selected);
+                Bundle bd = new Bundle();
+                bd.putBoolean("firstActivity",one_selected);
+                in.putExtras(bd);
+                startActivityForResult(in,3);
+            }
+        });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Log.d("Main22",String.valueOf(requestCode));
+        Log.d("Main22",String.valueOf(resultCode));
+        if(requestCode==0){
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
