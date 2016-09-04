@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.ObjectValueFilter;
+import com.wenjiehe.android_study.service.MyBroadcastReceiver;
 import com.wenjiehe.android_study.service.MyService;
 
 import java.util.ArrayList;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private SpinnerAdapter spinnerAdadpter;
 
     private TextView tx;
+
+    MyBroadcastReceiver mbr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        mbr = new MyBroadcastReceiver();
+        IntentFilter inf = new IntentFilter();
+        inf.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        registerReceiver(mbr,inf);
+
         final Intent intent = new Intent(MainActivity.this,MyService.class);
         intent.setAction("com.wenjiehe.android_study.service.MY_SERVICE");
         intent.setPackage("com.wenjiehe");
@@ -89,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
 
-                startService(intent);
+
+                //startService(intent);
                 /*Intent in  = new Intent(MainActivity.this,Main2Activity.class);
                 //in.putExtra("a",one_selected);
                 Bundle bd = new Bundle();
@@ -166,4 +176,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         toast.show();
     }
 
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(mbr);
+        super.onDestroy();
+    }
 }
