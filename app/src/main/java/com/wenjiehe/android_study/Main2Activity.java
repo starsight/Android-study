@@ -19,11 +19,12 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+/*
         Intent in = getIntent();
         Bundle bd = in.getExtras();
         Boolean b = bd.getBoolean("firstActivity");
         Log.d("Main222", String.valueOf(b));
-
+*/
         bt1 = (Button) findViewById(R.id.m2_bt1);
         bt2 = (Button) findViewById(R.id.m2_bt2);
 

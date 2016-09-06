@@ -17,7 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Main2Activity">
+            <intent-filter>
+                <action android:name="my_action"/>
+                <category android:name="my_category"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
         </activity>
 
         <service android:name=".service.MyService">

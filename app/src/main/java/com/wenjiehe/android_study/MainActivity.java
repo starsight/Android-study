@@ -97,8 +97,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                Intent intent0 = new Intent();
+                intent0.setAction("my_action");
+                intent0.addCategory("my_category");
+                startActivity(intent0);
                 //startService(intent);
                 /*Intent in  = new Intent(MainActivity.this,Main2Activity.class);
                 //in.putExtra("a",one_selected);
