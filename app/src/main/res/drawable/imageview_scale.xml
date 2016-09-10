@@ -3,6 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/pen_bg"
     android:gravity="top"
-    android:src="@mipmap/_16_plane"
+    android:src="@mipmap/ic_launcher"
     android:tileMode="disabled" >
 </bitmap>
