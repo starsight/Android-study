@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -93,14 +94,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         final Intent intent = new Intent(MainActivity.this,MyService.class);
         intent.setAction("com.wenjiehe.android_study.service.MY_SERVICE");
         intent.setPackage("com.wenjiehe");
-        Log.i("Mainb",getPackageName());
+        //Log.i("Mainb",getPackageName());
+
+        final MyDbOpenHelper mdoh = new MyDbOpenHelper(MainActivity.this,"my.db",null,3);
+
         tx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent0 = new Intent();
+                //mdoh.getWritableDatabase().execSQL("insert into person values(null,?)",new String[]{"wenjie"});
+                Cursor cursor = mdoh.getReadableDatabase().rawQuery("select * from person where name like ?",new String[]{"wenjie"});
+                if(cursor.moveToFirst())
+                    Log.d("Main",cursor.getString(cursor.getColumnIndex("name")));
+                //mdoh.onCreate();
+                /*Intent intent0 = new Intent();
                 intent0.setAction("my_action");
                 intent0.addCategory("my_category");
-                startActivity(intent0);
+                startActivity(intent0);*/
                 //startService(intent);
                 /*Intent in  = new Intent(MainActivity.this,Main2Activity.class);
                 //in.putExtra("a",one_selected);
