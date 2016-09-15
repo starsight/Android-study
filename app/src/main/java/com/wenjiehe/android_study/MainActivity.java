@@ -26,6 +26,7 @@ import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.ObjectValueFilter;
 import com.wenjiehe.android_study.service.MyBroadcastReceiver;
 import com.wenjiehe.android_study.service.MyService;
+import com.wenjiehe.android_study.view.FirstViewActivity;
 
 import java.util.ArrayList;
 
@@ -102,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 //mdoh.getWritableDatabase().execSQL("insert into person values(null,?)",new String[]{"wenjie"});
-                Cursor cursor = mdoh.getReadableDatabase().rawQuery("select * from person where name like ?",new String[]{"wenjie"});
+                /*Cursor cursor = mdoh.getReadableDatabase().rawQuery("select * from person where name like ?",new String[]{"wenjie"});
                 if(cursor.moveToFirst())
-                    Log.d("Main",cursor.getString(cursor.getColumnIndex("name")));
+                    Log.d("Main",cursor.getString(cursor.getColumnIndex("name")));*/
                 //mdoh.onCreate();
                 /*Intent intent0 = new Intent();
                 intent0.setAction("my_action");
@@ -117,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 bd.putBoolean("firstActivity",one_selected);
                 in.putExtras(bd);
                 startActivityForResult(in,3);*/
+
+                Intent int_view = new Intent(MainActivity.this, FirstViewActivity.class);
+                startActivity(int_view);
             }
         });
     }

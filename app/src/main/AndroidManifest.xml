@@ -14,24 +14,26 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".Main2Activity">
             <intent-filter>
-                <action android:name="my_action"/>
-                <category android:name="my_category"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="my_action" />
+
+                <category android:name="my_category" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
         <service android:name=".service.MyService">
             <intent-filter>
-                <action android:name="com.wenjiehe.android_study.service.MY_SERVICE"/>
+                <action android:name="com.wenjiehe.android_study.service.MY_SERVICE" />
             </intent-filter>
         </service>
 
+        <activity android:name=".view.FirstViewActivity"></activity>
     </application>
 
 </manifest>
