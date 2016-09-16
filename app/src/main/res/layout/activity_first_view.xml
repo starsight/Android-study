@@ -12,13 +12,8 @@
     tools:context="com.wenjiehe.android_study.view.FirstViewActivity">
 
 
-    <com.wenjiehe.android_study.view.CircleImageView
-        android:layout_width="160dp"
-        android:layout_height="240dp"
-        android:layout_margin="10dp"
-        android:id="@+id/circleimageview"
-        android:src="@mipmap/ic_launcher"
-        app:type="circle" />
-
+    <com.wenjiehe.android_study.view.StripMeiZi
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>
