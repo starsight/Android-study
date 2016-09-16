@@ -8,13 +8,15 @@ import com.wenjiehe.android_study.R;
 
 public class FirstViewActivity extends AppCompatActivity {
 
-    private FirstView firstview;
+    //private FirstView firstview;
+    private CircleImageView civ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_view);
 
-        firstview = (FirstView)findViewById(R.id.firstview);
+        //firstview = (FirstView)findViewById(R.id.firstview);
+        civ = (CircleImageView)findViewById(R.id.circleimageview);
 
     }
 }
