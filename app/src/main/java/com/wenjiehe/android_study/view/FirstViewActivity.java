@@ -10,7 +10,7 @@ public class FirstViewActivity extends AppCompatActivity {
 
     //private FirstView firstview;
     //private CircleImageView civ;
-    private StripMeiZi smz;
+    //private StripMeiZi smz;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

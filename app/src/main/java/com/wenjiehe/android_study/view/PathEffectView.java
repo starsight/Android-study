@@ -1,6 +1,8 @@
 package com.wenjiehe.android_study.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ComposePathEffect;
@@ -11,9 +13,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathDashPathEffect;
 import android.graphics.PathEffect;
+import android.graphics.RectF;
 import android.graphics.SumPathEffect;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.wenjiehe.android_study.R;
 
 /**
  * Created by yiyuan on 2016/9/16.
@@ -69,7 +74,7 @@ public class PathEffectView extends View {
         effects[4] = new PathDashPathEffect(p, 12, phase,
                 PathDashPathEffect.Style.MORPH);             //PathDashPathEffect
         effects[5] = new ComposePathEffect(effects[2], effects[4]);    //ComposePathEffect
-        effects[6] = new SumPathEffect(effects[2], effects[40]);   //SumPathEffect
+        effects[6] = new SumPathEffect(effects[2], effects[4]);   //SumPathEffect
         // 将画布移动到(10,10)处开始绘制
         canvas.translate(10, 10);
         // 依次使用7中不同的路径效果、7中不同的颜色来绘制路径
@@ -80,6 +85,14 @@ public class PathEffectView extends View {
             canvas.drawPath(mPath, mPaint);
             canvas.translate(0, 60);
         }
+        canvas.translate(0, 100);
+        RectF bounds = new RectF(0, 0, 400, 400);
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(),R.mipmap.meizi_back);
+        canvas.saveLayer(bounds, mPaint, Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+        canvas.drawColor(getResources().getColor(R.color.colorPrimaryDark));
+        canvas.drawBitmap(bmp, 200, 200, mPaint);
+        canvas.restoreToCount(1);
+        canvas.drawBitmap(bmp, 300, 200, mPaint);
         // 改变phase值，形成动画效果
         //phase += 2;
         //invalidate();
