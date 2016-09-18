@@ -12,8 +12,17 @@
     tools:context="com.wenjiehe.android_study.view.FirstViewActivity">
 
 
-    <com.wenjiehe.android_study.view.PathEffectView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <Button
+        android:text="animator"
+        android:id="@+id/view_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.wenjiehe.android_study.view.CircleImageView
+        android:layout_toRightOf="@id/view_id"
+        android:id="@+id/circleimageview"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>
