@@ -33,7 +33,8 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".view.FirstViewActivity"></activity>
+        <activity android:name=".view.FirstViewActivity" />
+        <activity android:name=".dragonboard.GetImageActivity"></activity>
     </application>
 
 </manifest>
