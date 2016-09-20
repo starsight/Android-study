@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
 /**
  * Created by wenjie on 16/08/27.
  */
@@ -63,5 +66,19 @@ public class MyUtils {
      */
     public static int getScreenH(Context context) {
         return getScreenHW2(context)[1];
+    }
+
+
+    //从流中读取数据
+    public static  byte[] read(InputStream inStream) throws Exception{
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024];
+        int len = 0;
+        while((len = inStream.read(buffer)) != -1)
+        {
+            outStream.write(buffer,0,len);
+        }
+        inStream.close();
+        return outStream.toByteArray();
     }
 }

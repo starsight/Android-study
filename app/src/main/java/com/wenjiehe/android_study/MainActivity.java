@@ -24,6 +24,7 @@ import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.ObjectValueFilter;
+import com.wenjiehe.android_study.dragonboard.GetImageActivity;
 import com.wenjiehe.android_study.service.MyBroadcastReceiver;
 import com.wenjiehe.android_study.service.MyService;
 import com.wenjiehe.android_study.view.FirstViewActivity;
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 in.putExtras(bd);
                 startActivityForResult(in,3);*/
 
-                Intent int_view = new Intent(MainActivity.this, FirstViewActivity.class);
+                Intent int_view = new Intent(MainActivity.this, GetImageActivity.class);
                 startActivity(int_view);
             }
         });
