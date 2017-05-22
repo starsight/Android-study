@@ -3,4 +3,7 @@
     <item name="Tag_Pic" type="id"></item>
     <item name="Tag_Text" type="id"></item>
     <string name="title_activity_hellokotlin">HellokotlinActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

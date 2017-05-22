@@ -2,6 +2,9 @@ package com.wenjiehe.android_study;
 
 
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -100,6 +103,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         final MyDbOpenHelper mdoh = new MyDbOpenHelper(MainActivity.this,"my.db",null,3);
 
+        FragmentManager fm =getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.bottom_layout,new FirstFragment());
+        ft.addToBackStack(null);
+        ft.commit();
+
+
         tx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,8 +130,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 in.putExtras(bd);
                 startActivityForResult(in,3);*/
 
-                Intent int_view = new Intent(MainActivity.this, GetImageActivity.class);
-                startActivity(int_view);
+                FragmentManager fm =getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.bottom_layout,new SecondFragment());
+                ft.addToBackStack(null);
+                ft.commit();
+
+                //Intent int_view = new Intent(MainActivity.this, GetImageActivity.class);
+                //startActivity(int_view);
             }
         });
     }

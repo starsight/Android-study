@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.wenjiehe.android_study">
+          package="com.wenjiehe.android_study">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -13,28 +13,31 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity">
             <intent-filter>
-                <action android:name="my_action" />
+                <action android:name="my_action"/>
 
-                <category android:name="my_category" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="my_category"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
 
         <service android:name=".service.MyService">
             <intent-filter>
-                <action android:name="com.wenjiehe.android_study.service.MY_SERVICE" />
+                <action android:name="com.wenjiehe.android_study.service.MY_SERVICE"/>
             </intent-filter>
         </service>
 
-        <activity android:name=".view.FirstViewActivity" />
-        <activity android:name=".dragonboard.GetImageActivity"></activity>
+        <activity android:name=".view.FirstViewActivity">
+
+        </activity>
+        <activity android:name=".dragonboard.GetImageActivity"/>
+
     </application>
 
 </manifest>
