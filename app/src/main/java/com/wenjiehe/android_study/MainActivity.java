@@ -92,9 +92,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
         mbr = new MyBroadcastReceiver();
-        IntentFilter inf = new IntentFilter();
+        /*IntentFilter inf = new IntentFilter();
         inf.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        registerReceiver(mbr,inf);
+        registerReceiver(mbr,inf);*/
 
         final Intent intent = new Intent(MainActivity.this,MyService.class);
         intent.setAction("com.wenjiehe.android_study.service.MY_SERVICE");
