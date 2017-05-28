@@ -11,6 +11,6 @@ import android.widget.Toast;
 public class MyBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Toast.makeText(context,"开机啦~",Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,"状态改变",Toast.LENGTH_SHORT).show();
     }
 }

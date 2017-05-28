@@ -5,12 +5,15 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.os.Environment;
 import android.os.SystemClock;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,13 +29,25 @@ import android.widget.*;
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.ObjectValueFilter;
 import com.wenjiehe.android_study.dragonboard.GetImageActivity;
 import com.wenjiehe.android_study.service.MyBroadcastReceiver;
 import com.wenjiehe.android_study.service.MyService;
 import com.wenjiehe.android_study.view.FirstViewActivity;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+
+import static android.R.attr.name;
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -51,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView tx;
 
     MyBroadcastReceiver mbr;
+    LocalBroadcastManager localBroadcastManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +92,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         spin_one.setAdapter(spinnerAdadpter);
         spin_one.setOnItemSelectedListener(this);
 
-        tx.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
 
         tx.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -91,8 +101,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        mbr = new MyBroadcastReceiver();
-        /*IntentFilter inf = new IntentFilter();
+        /*mbr = new MyBroadcastReceiver();
+        IntentFilter inf = new IntentFilter();
         inf.addAction("android.net.conn.CONNECTIVITY_CHANGE");
         registerReceiver(mbr,inf);*/
 
@@ -103,12 +113,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         final MyDbOpenHelper mdoh = new MyDbOpenHelper(MainActivity.this,"my.db",null,3);
 
-        FragmentManager fm =getFragmentManager();
+        /*FragmentManager fm =getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.bottom_layout,new FirstFragment());
         ft.addToBackStack(null);
-        ft.commit();
+        ft.commit();*/
 
+        final SecondFragment  sf = new SecondFragment();
+
+
+        //localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        IntentFilter intentFilter =new IntentFilter();
+        intentFilter.addAction("com.wenjiehe.broadcast");
+        //localBroadcastManager.registerReceiver(new MyBroadcastReceiver(),intentFilter);
+
+        registerReceiver(new MyBroadcastReceiver(),intentFilter);
 
         tx.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,12 +149,69 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 in.putExtras(bd);
                 startActivityForResult(in,3);*/
 
-                FragmentManager fm =getFragmentManager();
+                /*FragmentManager fm =getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.bottom_layout,new SecondFragment());
+                Bundle args =new Bundle();
+                byte bb =0x1;
+                args.putByte("1",bb);
+                sf.setArguments(args);
+                ft.replace(R.id.bottom_layout,sf);
                 ft.addToBackStack(null);
-                ft.commit();
+                ft.commit();*/
+                //Toast.makeText(MainActivity.this,"tx",Toast.LENGTH_SHORT).show();
 
+                /**
+                 * fragment -> activity
+                 * 通过回调函数，结合getData，先在getData获取到数据，再调用callback的getResult，把获取到的数据传参数到getResult
+                 * 再在activity中
+                 */
+                sf.getData(new SecondFragment.Callback() {
+                    @Override
+                    public void getResult(String result) {
+                        Toast.makeText(MainActivity.this, "-->>" + result, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                FileOutputStream fileOutputStream;
+                BufferedWriter bufferedWriter;
+                String str="";
+                File f = new File(Environment.getExternalStorageDirectory() + "/did");
+                try {
+                    //fileOutputStream = openFileOutput("datas",MODE_APPEND);
+                    str = Environment.getExternalStorageDirectory() + "/did" ;
+                    fileOutputStream = new FileOutputStream(f);
+                    bufferedWriter = new BufferedWriter(new OutputStreamWriter(fileOutputStream));
+                    bufferedWriter.write("nihaoya");
+                    //bufferedWriter.flush();
+                    bufferedWriter.close();
+                    fileOutputStream.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                FileInputStream fileInputStream;
+                BufferedReader bufferedReader;
+                try {
+                    //fileInputStream = openFileInput("datas");
+                    fileInputStream =new FileInputStream(f);
+                    bufferedReader =new BufferedReader(new InputStreamReader(fileInputStream));
+                    String str1;
+                    while((str1=bufferedReader.readLine())!=null){
+                        Toast.makeText(MainActivity.this,str1,Toast.LENGTH_SHORT).show();
+                    }
+                    bufferedReader.close();
+                    fileInputStream.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                /*Intent inte = new Intent();
+                inte.setAction("com.wenjiehe.broadcast");
+                sendBroadcast(inte);*/
+                //localBroadcastManager.sendBroadcast(inte);
                 //Intent int_view = new Intent(MainActivity.this, GetImageActivity.class);
                 //startActivity(int_view);
             }
@@ -163,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
         }
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
