@@ -90,6 +90,25 @@
             android:enabled="true"
             android:exported="true">
         </service>
+        <service
+            android:name=".restart.MessengerService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+        </service>
+
+        <activity android:name=".restart.IPCActivity">
+        </activity>
+
+        <service
+            android:name=".restart.AIDLService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote2">
+        </service>
+
+        <activity android:name=".restart.AIDLActivity">
+        </activity>
     </application>
 
 </manifest>

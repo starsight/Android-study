@@ -62,6 +62,9 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.button5)
     Button button5;
 
+    @BindView(R.id.button6)
+    Button button6;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +78,7 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
         button5.setOnClickListener(this);
+        button6.setOnClickListener(this);
     }
 
     @Override
@@ -82,8 +86,10 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
         switch(v.getId()){
             case R.id.button0:{
                 //Utils.ToastShow(this,"button0");
-                checkPremission(); //检查权限
-
+                //if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
+                    checkPremission(); //检查权限
+                 //   requestPermissions(new String[]{""}, 1);
+                //}
 
                 break;
             }
@@ -132,6 +138,11 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 break;
             }
+            case R.id.button6:{
+                Intent intent = new Intent(this,AIDLActivity.class);
+                startActivity(intent);
+                break;
+            }
         }
     }
 
@@ -150,7 +161,7 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    private static final int CAMERA_REQUEST_CODE = 1;
+    /*private static final int CAMERA_REQUEST_CODE = 1;
     private static final int REQUEST_CAPTURE = 2;
     private static final int REQUEST_PICTURE = 5;
     private static final int REVERSAL_LEFT = 3;
@@ -201,5 +212,59 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
             default:
                 super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }*/
+
+
+    private static final int CAMERA_REQUEST_CODE = 1;
+    String permission_camera = Manifest.permission.CAMERA;
+    String permission_storage = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+
+    private void checkPremission() {
+        if (ContextCompat.checkSelfPermission(this, permission_camera) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, permission_storage) != PackageManager.PERMISSION_GRANTED) {
+            //第一次请求权限时，进入此部分！！
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_REQUEST_CODE);
+        } else {
+            Utils.ToastShow(this, "同意权限1");
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {  //申请权限的返回值
+            case CAMERA_REQUEST_CODE:
+                int length = grantResults.length;
+                final boolean isGranted = length >= 1 && PackageManager.PERMISSION_GRANTED == grantResults[length - 1];//这边写的有问题，不应该是length-1
+                if (isGranted) {  //如果用户赋予权限，则调用相机
+                    //openCamera();
+                    Utils.ToastShow(this, "同意权限2");
+                } else { //未赋予权限，则做出对应提示
+                    Utils.ToastShow(this, "没有权限2");
+
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission_camera)) {
+                        Utils.ToastShow(this, "被拒绝，但可以提示！");
+                        //第一次被拒绝，给出新的提示理由，再请求
+                        new AlertDialog
+                                .Builder(this)
+                                .setTitle("提示")
+                                .setPositiveButton("好", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        ActivityCompat.requestPermissions(RestartActivity.this,
+                                                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, CAMERA_REQUEST_CODE);
+                                    }
+                                }).show();
+                    } else {
+                        //第二次请求时，用户依然点了拒绝，同时点了 不再提示 shouldShowRequestPermissionRationale返回false
+                        Utils.ToastShow(this, "不在提示！！");
+                    }
+
+                }
+                break;
+            default:
+                break;
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

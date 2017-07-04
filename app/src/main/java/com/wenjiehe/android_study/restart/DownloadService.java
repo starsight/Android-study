@@ -16,6 +16,10 @@ import com.wenjiehe.android_study.R;
 
 import java.io.File;
 
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
 public class DownloadService extends Service {
 
     String downloadUrl =null;
@@ -31,7 +35,7 @@ public class DownloadService extends Service {
 
     DownloadBinder downloadBinder =new DownloadBinder();
 
-    class DownloadBinder extends Binder {
+    public class DownloadBinder extends Binder {
         public void start(String url){
             if(downloadTask==null){
                 downloadTask = new DownloadTask(downloadListener);
@@ -108,7 +112,7 @@ public class DownloadService extends Service {
 
     private Notification getNotification(String tittle,int progress){
         Intent intent = new Intent(this, MainActivity.class);
-        PendingIntent pendingIntent =PendingIntent.getActivity(this,0,intent,0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentIntent(pendingIntent);
@@ -119,4 +123,11 @@ public class DownloadService extends Service {
         }
         return builder.build();
     }
+
+    /*public interface BlueService {
+        @GET("book/search")
+        Call<IBinder> getSearchBooks(@Query("q") String name,
+                                     @Query("tag") String tag, @Query("start") int start,
+                                     @Query("count") int count);
+    }*/
 }

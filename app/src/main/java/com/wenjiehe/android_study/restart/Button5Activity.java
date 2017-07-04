@@ -1,9 +1,16 @@
 package com.wenjiehe.android_study.restart;
 
+import android.Manifest;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,10 +37,10 @@ public class Button5Activity extends AppCompatActivity {
 
     DownloadService.DownloadBinder downloadBinder;
 
-    private ServiceConnection connection =new ServiceConnection() {
+    private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            downloadBinder =(DownloadService.DownloadBinder)service;
+            downloadBinder = (DownloadService.DownloadBinder) service;
         }
 
         @Override
@@ -42,6 +49,7 @@ public class Button5Activity extends AppCompatActivity {
         }
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +57,9 @@ public class Button5Activity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Intent intent =new Intent(this,DownloadService.class);
-        startService(intent);
-        bindService(intent,connection,BIND_AUTO_CREATE);
+        Intent intent = new Intent(this, DownloadService.class);
+        //startService(intent);
+        bindService(intent, connection, BIND_AUTO_CREATE);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,4 +81,12 @@ public class Button5Activity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+    }
+
+
 }

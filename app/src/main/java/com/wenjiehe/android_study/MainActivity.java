@@ -1,11 +1,6 @@
 package com.wenjiehe.android_study;
 
 
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,12 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
-import com.avos.avoscloud.AVAnalytics;
-import com.avos.avoscloud.AVOSCloud;
-import com.avos.avoscloud.AVObject;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.ObjectValueFilter;
-import com.wenjiehe.android_study.dragonboard.GetImageActivity;
 import com.wenjiehe.android_study.service.MyBroadcastReceiver;
 import com.wenjiehe.android_study.service.MyService;
 import com.wenjiehe.android_study.view.FirstViewActivity;
