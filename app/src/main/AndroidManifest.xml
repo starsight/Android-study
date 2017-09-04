@@ -109,6 +109,11 @@
 
         <activity android:name=".restart.AIDLActivity">
         </activity>
+        <activity
+            android:name=".restart.WindowActivity"
+            android:label="@string/title_activity_window"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

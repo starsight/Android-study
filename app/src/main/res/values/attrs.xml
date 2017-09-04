@@ -7,4 +7,9 @@
             <enum name="round" value="1"/>
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="StretchableFloatingButton">
+        <attr name="textContent" format="string"/>
+        <attr name="bacColor" format="color"/>
+    </declare-styleable>
 </resources>
