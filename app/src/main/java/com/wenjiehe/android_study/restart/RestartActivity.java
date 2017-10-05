@@ -148,7 +148,7 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             }
             case R.id.button7:{
-                Intent intent = new Intent(this,WindowActivity.class);
+                Intent intent = new Intent(this,SecondActivity.class);
                 startActivity(intent);
                 break;
             }
