@@ -114,17 +114,19 @@
             android:label="@string/title_activity_window"
             android:theme="@style/AppTheme">
         </activity>
-
         <activity
             android:name=".restart.SecondActivity"
             android:label="@string/title_activity_window"
             android:theme="@style/AppTheme">
         </activity>
-
         <activity
             android:name=".restart.ThirdActivity"
             android:label="@string/title_activity_window"
             android:theme="@style/AppTheme">
+        </activity>
+        <activity android:name=".restart.NestedScrollingActivity">
+        </activity>
+        <activity android:name=".restart.CoordinatorActivity">
         </activity>
     </application>
 

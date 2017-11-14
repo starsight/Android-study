@@ -68,6 +68,9 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
     @BindView(R.id.button7)
     Button button7;
 
+    @BindView(R.id.button8)
+    Button button8;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +86,7 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
         button5.setOnClickListener(this);
         button6.setOnClickListener(this);
         button7.setOnClickListener(this);
+        button8.setOnClickListener(this);
     }
 
     @Override
@@ -149,6 +153,11 @@ public class RestartActivity extends AppCompatActivity implements View.OnClickLi
             }
             case R.id.button7:{
                 Intent intent = new Intent(this,SecondActivity.class);
+                startActivity(intent);
+                break;
+            }
+            case R.id.button8:{
+                Intent intent = new Intent(this,CoordinatorActivity.class);
                 startActivity(intent);
                 break;
             }
